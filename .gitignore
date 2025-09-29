@@ -1,0 +1,76 @@
+# ========================================
+# Node / Express (Backend)
+# ========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+
+# Logs
+logs
+*.log
+logs/*.log
+
+# Environment files
+.env
+.env.*.local
+
+# Build / runtime artifacts
+dist/
+build/
+tmp/
+temp/
+.cache/
+coverage/
+.nyc_output/
+
+# Database dumps
+*.mongodb
+*.dump
+
+# PM2 / nodemon / process manager
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# ========================================
+# React (Frontend)
+# ========================================
+# Dependencies
+frontend/node_modules/
+
+# Build
+frontend/build/
+frontend/.cache/
+frontend/.parcel-cache/
+
+# Test coverage
+frontend/coverage/
+
+# Environment
+frontend/.env
+frontend/.env.*.local
+
+# ========================================
+# General IDE / Editor files
+# ========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+
+# ========================================
+# Misc
+# ========================================
+*.bak
+*.tmp
