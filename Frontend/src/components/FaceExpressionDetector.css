@@ -1,0 +1,56 @@
+
+ .video-Container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    justify-content: center;
+    padding: 4rem;
+ }
+.user-Video{
+    width: 20rem;
+    aspect-ratio: 16/9;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+ .detect-Btn{
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    background-color: blue ;
+    font-size: 1rem;
+    border-radius: 40px;
+    border : none;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 500;
+    font-family:  'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ }
+
+
+
+ /* Mobile */
+@media screen and (max-width : 576px ) {
+    .video-Container{
+    flex-direction: column;
+ }
+}
+
+/* Tablet Portrait*/
+/* @media screen and (max-width : 768px ) {
+    
+} */
+
+/* Tablet Landscape */
+/* @media screen and (max-width : 992px ) {
+    
+} */
+
+/* Laptop */
+/* @media screen and (max-width : 1200px ) {
+    
+} */
+
+/* Large desktop */
+/* @media screen and (max-width : 1400px ) {
+    
+} */

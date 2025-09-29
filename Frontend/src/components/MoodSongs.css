@@ -1,0 +1,75 @@
+.Mood-Songs{
+    width: 50%;
+    margin: auto;
+}
+.Heading{
+    font-size: 3rem;
+    font-weight: 700;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    margin: 0px 0px 30px 0px;
+}
+.single-song-group{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.group{
+    background-color: blue;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+.titleArtist{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.title{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.artist{
+    font-size: 1rem;
+}
+.play-pause-icon{
+    font-size: 2.2rem;
+}
+
+/* Mobile */
+@media screen and (max-width : 576px ) {
+    .Mood-Songs{
+    width: 90%;
+}
+.Heading{
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+}
+
+/* Tablet Portrait*/
+/* @media screen and (max-width : 768px ) {
+    
+} */
+
+/* Tablet Landscape */
+/* @media screen and (max-width : 992px ) {
+    
+} */
+
+/* Laptop */
+/* @media screen and (max-width : 1200px ) {
+    
+} */
+
+/* Large desktop */
+/* @media screen and (max-width : 1400px ) {
+    
+} */
