@@ -29,9 +29,9 @@ const MoodSongs = ({Songs}) => {
               }
               <button onClick={()=>handlePlayPause(index)}>
                 {IsPlay === index ?
-                 <i className="ri-pause-line"></i> 
+                 <i className="ri-pause-line icon"></i> 
                  :  
-                 <i className="ri-play-fill"></i> 
+                 <i className="ri-play-fill icon"></i> 
                 }
               </button>
               
