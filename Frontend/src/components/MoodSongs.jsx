@@ -1,27 +1,17 @@
 import { useState } from "react";
 import "./MoodSongs.css"
 
-const MoodSongs = () => {
-  const [
-    Songs,
-    // setSongs
-  ] = useState([
-    {
-      title: "Into_you.mp3",
-      aritst: "Hiten",
-      url: "https://neerajgupta.netlify.app",
-    },
-    {
-      title: "Feel_for_you.mp3",
-      aritst: "Shubh",
-      url: "https://elite-series.netlify.app",
-    },
-    {
-      title: "Tum_hi_ho.mp3",
-      aritst: "Arijit Singh",
-      url: "https://weathers-neeraj.netlify.app",
-    },
-  ]);
+const MoodSongs = ({Songs}) => {
+  // console.log("Songs=================",Songs);
+  const [IsPlay, setIsPlay] = useState(null);
+  const handlePlayPause = (index)=>{
+    if(IsPlay == index){
+      setIsPlay(null)
+    }else{
+      setIsPlay(index)
+    }
+  }
+  
 
   return (
     <div className="Mood-Songs">
@@ -31,11 +21,21 @@ const MoodSongs = () => {
           <div className="group" key={index}>
             <div className="titleArtist">
               <div className="title">{song.title}</div>
-              <div className="artist">{song.aritst}</div>
+              <div className="artist">{song.artist}</div>
             </div>
             <div className="play-pause-icon">
-              <i className="ri-play-fill"></i>
-              <i className="ri-pause-line"></i>
+              { IsPlay === index &&
+              <audio src={song.url} controls autoPlay={IsPlay === index} style={{display : "none"}}></audio>
+              }
+              <button onClick={()=>handlePlayPause(index)}>
+                {IsPlay === index ?
+                 <i className="ri-pause-line"></i> 
+                 :  
+                 <i className="ri-play-fill"></i> 
+                }
+              </button>
+              
+              
             </div>
           </div>
         ))}

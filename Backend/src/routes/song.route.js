@@ -7,10 +7,6 @@ const router = express.Router();
 const upload = multer({ Storage: multer.memoryStorage() });
 
 router.post("/songs", upload.single("audio"), async (req, res) => {
-  // write your logic
-  console.log(req.body);
-  console.log(req.file);
-
   // here upload file
   const FileData = await uploadFile(req.file);
   console.log("fileData url================>", FileData.url);
@@ -29,9 +25,17 @@ router.post("/songs", upload.single("audio"), async (req, res) => {
   });
 });
 
-router.get("/songs", (req, res) => {
+router.get("/songs", async(req, res) => { 
   // write your logic
-  res.send("hello this is from songs");
+  const { mood } = req.query;
+  const songs = await songModel.find({
+    mood : mood ,
+  })
+
+  res.status(200).json({
+    message : "song fetched successfully.",
+    songs : songs,
+  })
 });
 
 module.exports = router;

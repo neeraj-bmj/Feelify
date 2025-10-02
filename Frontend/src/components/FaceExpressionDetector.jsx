@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import * as faceapi from "face-api.js";
 import "./FaceExpressionDetector.css"
+import axios from "axios";
 
-export default function FaceExpressionDetector() {
+export default function FaceExpressionDetector({setSongs}) {
   const videoRef = useRef();
 
   // here this is load models
@@ -24,28 +25,31 @@ export default function FaceExpressionDetector() {
 
   // here
   async function detectMood(){
-      const detections = await faceapi
-        .detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions())
-        .withFaceExpressions();
-
-      let mostProableExpression = 0;
-      let _expression = "";
-
-      // here if detection nhi ho paya then console No face detected
-      if (!detections || detections.length === 0) {
-        console.log("No Face Detected");
-        return;
+    const detections = await faceapi
+      .detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions())
+      .withFaceExpressions();
+    let mostProableExpression = 0;
+    let _expression = "";
+    // here if detection nhi ho paya then console No face detected
+    if (!detections || detections.length === 0) {
+      console.log("No Face Detected");
+      return;
+    }
+    // here jo bhi expression jyda aayega usko print kar dega
+    for (const expression of Object.keys(detections[0].expressions)) {
+      if (detections[0].expressions[expression] > mostProableExpression) {
+        mostProableExpression = detections[0].expressions[expression];
+        _expression = expression;
       }
+    }
+    // console.log(detections[0].expressions);
+    console.log(_expression);
+    axios.get(`http://localhost:3000/api/songs?mood="${_expression}"`)
+    .then((response)=>{
+      console.log("Songs Fetched successfully", response.data);
+      setSongs(response.data.songs);
+    })
 
-      // here jo bhi expression jyda aayega usko print kar dega
-      for (const expression of Object.keys(detections[0].expressions)) {
-        if (detections[0].expressions[expression] > mostProableExpression) {
-          mostProableExpression = detections[0].expressions[expression];
-          _expression = expression;
-        }
-      }
-
-      console.log(detections[0].expressions);
   };
 
   useEffect(() => {
