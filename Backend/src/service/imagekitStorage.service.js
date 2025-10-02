@@ -9,17 +9,7 @@ const client = new ImageKit({
 
 async function uploadFile(file) {
   console.log("this is file =========================>", file.buffer);
-  // return new Promise(async(resolve, reject)=>{
   return(
-    // await client.files.upload({
-    //   file: await toFile(
-    //     Buffer.from(file.buffer),
-    //      "file"),
-    //   fileName: "fileName",
-    // });
-
-    // OR
-
     await client.files.upload(
       {
         file: await toFile(file.buffer, file),
