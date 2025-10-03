@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./MoodSongs.css"
+import { toast } from "react-toastify";
 
 const MoodSongs = ({Songs}) => {
   // console.log("Songs=================",Songs);
@@ -7,8 +8,10 @@ const MoodSongs = ({Songs}) => {
   const handlePlayPause = (index)=>{
     if(IsPlay == index){
       setIsPlay(null)
+      toast.success("Song Pause.");
     }else{
       setIsPlay(index)
+      toast.success("Song Play.");
     }
   }
   

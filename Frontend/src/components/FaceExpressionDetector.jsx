@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import * as faceapi from "face-api.js";
 import "./FaceExpressionDetector.css"
 import axios from "axios";
+ import { toast } from 'react-toastify';
 
 export default function FaceExpressionDetector({setSongs}) {
   const videoRef = useRef();
@@ -48,6 +49,7 @@ export default function FaceExpressionDetector({setSongs}) {
     .then((response)=>{
       console.log("Songs Fetched successfully", response.data);
       setSongs(response.data.songs);
+      toast.success("Face detected successful.");
     })
 
   };
