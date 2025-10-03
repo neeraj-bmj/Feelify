@@ -1,14 +1,19 @@
 import React from 'react'
-import Feelify from './pages/Feelify';
+import Navbar from "./components/Navbar";
+import MainRoutes from './components/MainRoutes';
 
 
 const App = () => {
+  
 
   return (
     <div>
-       <Feelify/>
+      <Navbar/>
+      <MainRoutes/>
     </div>
   );
 };
+
+// color palet   https://colorhunt.co/palette/6b3f698d5f8ca376a2ddc3c3
 
 export default App;

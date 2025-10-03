@@ -16,14 +16,14 @@
  .detect-Btn{
     cursor: pointer;
     padding: 0.6rem 1rem;
-    background-color: blue ;
-    font-size: 1rem;
+    background-color: #8D5F8C;
     border-radius: 40px;
     border : none;
     font-size: 1.5rem;
     color: white;
-    font-weight: 500;
-    font-family:  'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ }
+ .detect-Btn:active {
+   background-color: #6B3F69;
  }
 
 

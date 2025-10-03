@@ -67,7 +67,7 @@ export default function FaceExpressionDetector({setSongs}) {
         className="user-Video"
       />
 
-      <button onClick={detectMood} className="detect-Btn">Detect Mood</button>
+      <button onClick={detectMood} className="detect-Btn poppins-semibold">Detect Mood</button>
     </div>
   );
 }

@@ -7,5 +7,12 @@
  width: 100%;
  height: 100%;
  font-family: 'Segoe UI, sans-serif';
- background-color: rgb(75, 74, 74);
+ background-color: #DDC3C3;
  }
+
+ .poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
