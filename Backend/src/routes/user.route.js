@@ -1,6 +1,7 @@
 const mongoose = require("express");
 const express = require("express");
 const authController = require("../controller/auth.controller");
+const { authUserMiddleware } = require("../middleware/auth.middleware");
 
 const router = express.Router();
 
@@ -11,6 +12,6 @@ router.post("/register", authController.registerUser);
 router.post("/login", authController.loginUser);
 
 // GET     /api/user/auth/user_profile
-router.get("/user_profile", authController.userProfile)
+router.get("/user_profile" ,authController.userProfile)
 
 module.exports = router;

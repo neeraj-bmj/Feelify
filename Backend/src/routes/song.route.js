@@ -2,12 +2,13 @@ const express = require("express");
 const multer = require("multer");
 const uploadFile = require("../service/imagekitStorage.service");
 const songModel = require('../models/song.model');
+const { authUserMiddleware } = require("../middleware/auth.middleware");
 
 const router = express.Router();
 const upload = multer({ Storage: multer.memoryStorage() });
 
 // POST    /api/songs
-router.post("/songs", upload.single("audio"), async (req, res) => {
+router.post("/songs", authUserMiddleware ,upload.single("audio"), async (req, res) => {
   console.log("req.file================>", req.file);
   // here upload file
   const FileData = await uploadFile(req.file); 

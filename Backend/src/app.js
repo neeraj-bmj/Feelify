@@ -18,8 +18,10 @@ app.use("/api/user/auth", userRoute);
 // cors middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin: "http://localhost:5173", // your React frontend URL
+    credentials: true, // allow cookies
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"], // allowed headers
   })
 );
 
