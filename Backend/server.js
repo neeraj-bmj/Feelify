@@ -3,7 +3,9 @@ const app = require("./src/app.js");
 const connectToDB = require("./src/db/db.js");
 
 
+
 connectToDB()
+
 
 
 

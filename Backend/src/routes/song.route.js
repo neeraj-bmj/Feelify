@@ -6,9 +6,11 @@ const songModel = require('../models/song.model');
 const router = express.Router();
 const upload = multer({ Storage: multer.memoryStorage() });
 
+// POST    /api/songs
 router.post("/songs", upload.single("audio"), async (req, res) => {
+  console.log("req.file================>", req.file);
   // here upload file
-  const FileData = await uploadFile(req.file);
+  const FileData = await uploadFile(req.file); 
   console.log("fileData url================>", FileData.url);
 
   // here create song post in database mongoose
@@ -25,6 +27,7 @@ router.post("/songs", upload.single("audio"), async (req, res) => {
   });
 });
 
+// GET   /api/songs
 router.get("/songs", async(req, res) => { 
   // write your logic
   const { mood } = req.query;

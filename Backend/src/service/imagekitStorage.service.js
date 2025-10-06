@@ -12,9 +12,9 @@ async function uploadFile(file) {
   return(
     await client.files.upload(
       {
-        file: await toFile(file.buffer, file),
+        file: await toFile(file.buffer, file),      
         fileName: uuid(),
-        folder: "Feelify",
+        folder: "Feelify",  
       },
       (error, result) => {
         if (error) {

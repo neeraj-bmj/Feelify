@@ -6,7 +6,6 @@ const MainRoutes = () => {
     <div>
       <Routes>
         <Route path="/" element={<Feelify/>} />
-        <Route path="/add_music" element={""} />
         <Route path="/user_profile" element={""} />
       </Routes>
     </div>
