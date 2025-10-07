@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./MoodSongs.css"
 import { toast } from "react-toastify";
+import { MoodContext } from "../context/MoodContext.js";
 
-const MoodSongs = ({Songs}) => {
+const MoodSongs = () => {
   // console.log("Songs=================",Songs);
+
+   const {songs}= useContext(MoodContext)
+
+   
   const [IsPlay, setIsPlay] = useState(null);
   const handlePlayPause = (index)=>{
     if(IsPlay == index){
@@ -20,7 +25,7 @@ const MoodSongs = ({Songs}) => {
     <div className="Mood-Songs">
       <h1 className="Heading">Recomended Songs</h1>
       <div className="single-song-group">
-        {Songs.map((song, index) => (
+        {songs.map((song, index) => (
           <div className="group" key={index}>
             <div className="titleArtist">
               <div className="title">{song.title}</div>

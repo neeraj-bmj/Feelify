@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="logo-first-heading poppins-semibold">FeeliFy</div>
       <div className="part-second">
         <NavLink to="/" className={(e) => (e.isActive ? "active_link poppins-semibold" : "poppins-semibold")} >Home</NavLink>
-        <NavLink to="/add_music" className={(e) => (e.isActive ? "active_link  poppins-semibold" : "poppins-semibold")} >Add Music</NavLink>
+        <NavLink to="/add_songs" className={(e) => (e.isActive ? "active_link  poppins-semibold" : "poppins-semibold")} >Add Music</NavLink>
         <NavLink to="user_profile" className="user_profile" >
           <img src={logoSvg} alt="user_profile_logo" />
         </NavLink>

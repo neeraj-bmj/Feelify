@@ -1,11 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import * as faceapi from "face-api.js";
 import "./FaceExpressionDetector.css"
-import axios from "axios";
+import { MoodContext } from "../context/MoodContext.js";
  import { toast } from 'react-toastify';
 
-export default function FaceExpressionDetector({setSongs}) {
+export default function FaceExpressionDetector() {
   const videoRef = useRef();
+  const { setMood }= useContext(MoodContext)
 
   // here this is load models
   const loadModels = async () => {
@@ -34,6 +35,7 @@ export default function FaceExpressionDetector({setSongs}) {
     // here if detection nhi ho paya then console No face detected
     if (!detections || detections.length === 0) {
       console.log("No Face Detected");
+      toast.error("No Face Detected. Try Again!");
       return;
     }
     // here jo bhi expression jyda aayega usko print kar dega
@@ -45,12 +47,8 @@ export default function FaceExpressionDetector({setSongs}) {
     }
     // console.log(detections[0].expressions);
     console.log(_expression);
-    axios.get(`http://localhost:3000/api/songs?mood="${_expression}"`)
-    .then((response)=>{
-      console.log("Songs Fetched successfully", response.data);
-      setSongs(response.data.songs);
-      toast.success("Face detected successful.");
-    })
+      setMood(_expression);
+      toast.success("You are ", _expression);
 
   };
 

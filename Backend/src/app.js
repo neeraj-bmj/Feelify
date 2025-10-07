@@ -5,14 +5,14 @@ const songRoute = require("./routes/song.route");
 const userRoute = require("./routes/user.route");
 
 const app = express();
-// app.use(cors());
+app.use(cors());
 
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
 
 // routes
-app.use("/api", songRoute);
+app.use("/", songRoute);
 app.use("/api/user/auth", userRoute);
 
 // cors middleware
