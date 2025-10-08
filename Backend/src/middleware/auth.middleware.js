@@ -23,10 +23,10 @@ async function authUserMiddleware(req, res, next) {
     req.user = User;
     next();
 
-    return res.status(200).json({
-      message: "user fetched successfully",
-      User,
-    });
+    // return res.status(200).json({
+    //   message: "user fetched successfully",
+    //   User,
+    // });
   } catch (error) {
     return res.status(409).json({
       message: "unauthorized user",

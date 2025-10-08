@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import MoodContext from "./MoodContext";
 
-
 const MoodContextWrapper = (props) => {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,37 +22,45 @@ const MoodContextWrapper = (props) => {
       setError(err);
       setSongs([]);
       console.error("there was an error!", err);
-    } finally{
+    } finally {
       setLoading(false);
     }
-  },[]);
+  }, []);
 
-  
-
-  const FetchData = async(mood)=>{
-     try {
-      await axios.get(`http://localhost:3000/songs?mood="${mood}"`).then((response) => {
-      console.log("Mood Songs Fetched successfully", response.data.songs);
-      setSongs(response.data.songs);
-    });
-    }  catch (err) {
+  const FetchData = async (mood) => {
+    try {
+      await axios
+        .get(`http://localhost:3000/songs?mood="${mood}"`)
+        .then((response) => {
+          console.log("Mood Songs Fetched successfully", response.data.songs);
+          setSongs(response.data.songs);
+        });
+    } catch (err) {
       setError(err);
       setSongs([]);
       console.error("there was an error!", err);
-    } finally{
+    } finally {
       setLoading(false);
     }
-  }
+  };
 
   // This is for / router for all mood expression songs on home page.
   useEffect(() => {
     FetchData(mood);
-    
   }, [mood]);
 
   return (
     <MoodContext.Provider
-      value={{songs, setSongs, loading, error, setLoading, user, setUser, mood, setMood,
+      value={{
+        songs,
+        setSongs,
+        loading,
+        error,
+        setLoading,
+        user,
+        setUser,
+        mood,
+        setMood,
       }}
     >
       {props.children}
