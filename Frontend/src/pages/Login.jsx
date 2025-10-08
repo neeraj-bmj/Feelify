@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./Login.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -11,9 +12,13 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const submitHandler = (data) => {
-    console.log(" data==================> ", data);
+    console.log("Login data==================> ", data);
     reset();
+    toast.success("Logged in Successful.")
+    navigate("/");
   };
   return (
     <div className="formContainer">
@@ -42,7 +47,7 @@ const Login = () => {
               />
               {errors.email && (
                 <p style={{ color: "red", fontSize: "14px" }}>
-                  {errors.title.message}
+                  {errors.email.message}
                 </p>
               )}
             </div>
@@ -58,7 +63,7 @@ const Login = () => {
               />
               {errors.password && (
                 <p style={{ color: "red", fontSize: "14px" }}>
-                  {errors.title.message}
+                  {errors.password.message}
                 </p>
               )}
             </div>
