@@ -1,0 +1,183 @@
+.formContainer {
+  width: 100vw;
+  height: 87vh;
+}
+.formContainer,
+.card,
+.headingFirstPart,
+.formSecondPart,
+.loginForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginForm,
+.formSecondPart,
+.headingFirstPart {
+  flex-direction: column;
+}
+.card {
+  width: 100%;
+  height: 100%;
+}
+.headingFirstPart {
+  width: 60%;
+  height: 100%;
+  background-color: #8d5f8c;
+  gap: 1rem;
+  padding: 0px 6rem;
+  color: #fff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.headingFirstPart .heading {
+  font-size: 4rem;
+  font-weight: 700;
+}
+.headingFirstPart p {
+  font-size: 1rem;
+}
+.formSecondPart {
+  width: 40%;
+  gap: 3rem;
+  color: #6b3f69;
+}
+.formSecondPart .heading {
+  font-size: 4rem;
+}
+.loginForm {
+  font-size: 1.5rem;
+  gap: 2rem;
+  align-items: flex-end;
+}
+.userEmail,
+.userPassword{
+    display: flex;
+    flex-direction: column;
+}
+.inputStyle {
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem 1.2rem;
+}
+.thirdPart{
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+}
+
+/* Responsive styles: mobile, tablet, desktop */
+@media (max-width: 600px) {
+  .formContainer {
+    height: auto;
+    padding: 2rem 1rem;
+  }
+  .card {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .headingFirstPart {
+    display: none;
+    /* width: 100%;
+    height: auto;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    gap: 0.75rem; */
+  }
+  /* .headingFirstPart .heading {
+    font-size: 2.2rem;
+  }
+  .headingFirstPart p {
+    font-size: 0.95rem;
+  } */
+  .formSecondPart {
+    width: 100%;
+    gap: 1.25rem;
+    padding: 1.5rem 1rem;
+    color: #6b3f69;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .formSecondPart .heading {
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  .loginForm {
+    font-size: 1rem;
+    gap: 1rem;
+    align-items: stretch;
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+  .userEmail,
+  .userPassword{
+    width: 100%;
+  }
+  .inputStyle {
+    font-size: 1rem;
+    padding: 0.7rem 0.9rem;
+  }
+  .thirdPart{
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.25rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  /* Tablet */
+  .formContainer {
+    height: 85vh;
+    padding: 1.5rem;
+  }
+  .card {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+  .headingFirstPart {
+    width: 55%;
+    padding: 2rem 4rem;
+  }
+  .headingFirstPart .heading {
+    font-size: 3rem;
+  }
+  .formSecondPart {
+    width: 45%;
+    gap: 2rem;
+    padding: 1.5rem 2rem;
+  }
+  .formSecondPart .heading {
+    font-size: 3rem;
+  }
+  .loginForm {
+    font-size: 1.25rem;
+    gap: 1.5rem;
+    align-items: flex-end;
+  }
+  .inputStyle {
+    font-size: 1.25rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* Larger desktops */
+  .headingFirstPart .heading {
+    font-size: 4.5rem;
+  }
+  .headingFirstPart {
+    padding: 0px 8rem;
+  }
+  .formSecondPart .heading {
+    font-size: 4rem;
+  }
+  .loginForm {
+    font-size: 1.6rem;
+  }
+}
