@@ -3,3 +3,10 @@ export const registerUserLocal = ( userName, email, password ) => {
   localStorage.setItem("user", JSON.stringify({ userName, email, password }));
 };
 
+// this is for login user and get data from local storage
+export const loginUserLocal = (email, password) => {
+  console.log("User Logged in!");
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.email === email && user?.password === password;
+};
+

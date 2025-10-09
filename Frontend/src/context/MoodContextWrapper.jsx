@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import MoodContext from "./MoodContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { registerUserLocal } from "../utils/Auth";
+import { loginUserLocal, registerUserLocal } from "../utils/Auth";
 
 const MoodContextWrapper = (props) => {
   const [songs, setSongs] = useState([]);
@@ -119,6 +119,10 @@ const MoodContextWrapper = (props) => {
 
       console.log("user logged in  successfully:", response.data);
       setUser(response.data.user); // update state
+     
+      // set user in Local Storage to verify
+      loginUserLocal(response.data.isUserAvailable.email, response.data.isUserAvailable.password);   
+
       toast.success("Logged in Successful.");
       navigate("/");
     } catch (err) {
