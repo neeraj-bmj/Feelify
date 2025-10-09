@@ -124,8 +124,9 @@ const MoodContextWrapper = (props) => {
       console.log("user logged in  successfully:", response.data);
       setUser(response.data.user); // update state
 
-      // Store token in localStorage
+      // Store token in localStorage and also cookie
       localStorage.setItem("token", response.data.token);
+      cookieStore.set("token", response.data.token);
 
       // set user in Local Storage to verify
       loginUserLocal(
