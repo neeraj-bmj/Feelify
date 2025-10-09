@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import MoodContext from "./MoodContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { registerUserLocal } from "../utils/Auth";
 
 const MoodContextWrapper = (props) => {
   const [songs, setSongs] = useState([]);
@@ -79,7 +80,8 @@ const MoodContextWrapper = (props) => {
       );
 
       console.log("user registered  successfully:", response.data);
-      setUser(response.data.user); // update state
+      setUser(response.data.user); // update state 
+      registerUserLocal(  response.data.user.userName, response.data.user.email, response.data.user.password)  // set user in Local Storage
       toast.success("User registered Successful.");
       navigate("/");
 
