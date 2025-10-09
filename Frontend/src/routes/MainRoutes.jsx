@@ -4,7 +4,6 @@ import PageNotFound from "../pages/PageNotFound";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 // import User_Profile from "../pages/User_Profile";
-// import UserProfilePage from "../pages/UserProfileDataPage";
 
 const MainRoutes = () => {
   return (
@@ -14,7 +13,6 @@ const MainRoutes = () => {
         <Route path="/api/user/auth/register" element={<Register/>} />
         <Route path="/api/user/auth/login" element={<Login/>} />
         {/* <Route path="/user_profile" element={<User_Profile/>} /> */}
-        {/* <Route path="/user_profile" element={<UserProfilePage/>} /> */}
         <Route path="*" element={<PageNotFound/>} />
 
       </Routes>

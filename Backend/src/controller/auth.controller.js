@@ -31,13 +31,14 @@ async function registerUser(req, res) {
     password: hashPassword,
   });
 
-  const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
+  const token = await jwt.sign({ id: user._id, email : user.email }, process.env.JWT_SECRET_KEY,{ expiresIn : "7d"});
   res.cookie("token", token);
 
   console.log("✅user Registered successful ✅", user);
   res.status(201).json({
     message: "User registered successfully",
     user,
+    token, // include token here
   });
 }
 
@@ -60,20 +61,23 @@ async function loginUser(req, res) {
   if (!isValidPassword) {
     return res.status(400).json({
       message: "Invalid email or password",
-    });
+    }); 
   }
 
   try {
     const token = await jwt.sign( 
-      { id: isUserAvailable._id },
-      process.env.JWT_SECRET_KEY
+      { id: isUserAvailable._id, email : isUserAvailable.email },
+      process.env.JWT_SECRET_KEY,
+      {expiresIn : "7d"} 
     );
     res.cookie("token", token);
-
+    
+    console.log("Token=======>", token);
     console.log("✅user Logged in successful ===> ✅", isUserAvailable);
     res.status(200).json( {
       message: "user logged in successfully",
       isUserAvailable,
+      token, // include token here
     });
   } catch (error) {
     return res.status(409).json({

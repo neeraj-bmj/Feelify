@@ -12,7 +12,7 @@ const MoodContextWrapper = (props) => {
   const [error, setError] = useState(null);
   const [mood, setMood] = useState("default");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // This is for / router for all songs on home page.
   useEffect(() => {
@@ -63,11 +63,11 @@ const MoodContextWrapper = (props) => {
       const response = await axios.post(
         "http://localhost:3000/api/user/auth/register",
         {
-          fullName : {
-            firstName : data.firstName,
-            lastName : data.lastName
+          fullName: {
+            firstName: data.firstName,
+            lastName: data.lastName,
           },
-          userName : data.userName,
+          userName: data.userName,
           email: data.email,
           password: data.password,
         },
@@ -80,11 +80,16 @@ const MoodContextWrapper = (props) => {
       );
 
       console.log("user registered  successfully:", response.data);
-      setUser(response.data.user); // update state 
-      registerUserLocal(  response.data.user.userName, response.data.user.email, response.data.user.password)  // set user in Local Storage
+      setUser(response.data.user); // update state
+      // Store token in localStorage
+      localStorage.setItem("token", response.data.token);
+      registerUserLocal(
+        response.data.user.userName,
+        response.data.user.email,
+        response.data.user.password
+      ); // set user in Local Storage
       toast.success("User registered Successful.");
       navigate("/");
-
     } catch (err) {
       setError(err);
       setUser(null);
@@ -94,7 +99,6 @@ const MoodContextWrapper = (props) => {
       setLoading(false);
     }
   };
-
 
   // This is for login User for /api/user/auth/login route
 
@@ -119,9 +123,15 @@ const MoodContextWrapper = (props) => {
 
       console.log("user logged in  successfully:", response.data);
       setUser(response.data.user); // update state
-     
+
+      // Store token in localStorage
+      localStorage.setItem("token", response.data.token);
+
       // set user in Local Storage to verify
-      loginUserLocal(response.data.isUserAvailable.email, response.data.isUserAvailable.password);   
+      loginUserLocal(
+        response.data.isUserAvailable.email,
+        response.data.isUserAvailable.password
+      );
 
       toast.success("Logged in Successful.");
       navigate("/");

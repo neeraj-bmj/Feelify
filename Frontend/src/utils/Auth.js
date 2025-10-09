@@ -18,3 +18,12 @@ export const loginUserLocal = (email, password) => {
   }
 };
 
+// this is for logout user and remove data from local storage
+// export const logoutUserLocal = () => {
+//   localStorage.removeItem("user");
+// };
+
+// this is for authenticated data from local storage
+// export const isAuthenticatedLocal = () => {
+//   return !!localStorage.getItem("user");
+// };
