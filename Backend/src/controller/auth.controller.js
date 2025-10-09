@@ -12,6 +12,7 @@ async function registerUser(req, res) {
     password,
     fullName: { firstName, lastName },
   } = req.body;
+  console.log("register data ==========",req.body);
   const isUserAvailable = await userModel.findOne({ email });
   if (isUserAvailable) {
     return res.status(401).JSON({
@@ -33,7 +34,7 @@ async function registerUser(req, res) {
   const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
   res.cookie("token", token);
 
-  res.status(201).json({
+  res.status(201).json((console.log("user Registered successful ✅")),{
     message: "User registered successfully",
     user,
   });
@@ -43,6 +44,7 @@ async function registerUser(req, res) {
 
 async function loginUser(req, res) {
   const { email, password } = req.body;
+  console.log("login data=========>",req.body);
   const isUserAvailable = await userModel.findOne({ email });
   if (!isUserAvailable) {
     return res.status(401).json({
@@ -61,20 +63,20 @@ async function loginUser(req, res) {
   }
 
   try {
-    const token = await jwt.sign(
+    const token = await jwt.sign( 
       { id: isUserAvailable._id },
       process.env.JWT_SECRET_KEY
     );
     res.cookie("token", token);
 
-    res.status(200).json({
+    res.status(200).json(( console.log("user Logged in successful ===> ✅")) , {
       message: "user logged in successfully",
       isUserAvailable,
     });
   } catch (error) {
     return res.status(409).json({
       message: "Unauthorized user",
-    });
+    }); 
   }
 }
 

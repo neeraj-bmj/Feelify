@@ -7,10 +7,10 @@ import { ToastContainer } from "react-toastify";
 import MoodContextWrapper from "./context/MoodContextWrapper.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <MoodContextWrapper>
-    <BrowserRouter>
+  <BrowserRouter>
+    <MoodContextWrapper>
       <App />
       <ToastContainer />
-    </BrowserRouter>
-  </MoodContextWrapper>
+    </MoodContextWrapper>
+  </BrowserRouter>
 );

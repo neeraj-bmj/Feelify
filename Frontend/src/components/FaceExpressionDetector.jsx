@@ -48,7 +48,7 @@ export default function FaceExpressionDetector() {
     // console.log(detections[0].expressions);
     console.log(_expression);
       setMood(_expression);
-      toast.success("You are ", _expression);
+      toast.success(" Your Face Expression Detected. ");
 
   };
 

@@ -1,8 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./Register.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
 const Register = () => {
   const {
@@ -12,13 +11,10 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
 
   const submitHandler = (data) => {
     console.log("Register data==================> ", data);
     reset();
-    toast.success("Now, you are registered.")
-    navigate("/");
   };
   return (
     <div className="formContainers">
@@ -105,7 +101,7 @@ const Register = () => {
             <div className="userPassword">
               <label className="label"> Password : </label>
               <input
-                {...register("passwrod", { required: " Password is required" })}
+                {...register("password", { required: " Password is required" })}
                 type="password"
                 placeholder="••••••••••••••••"
                 className="formInputStyle"

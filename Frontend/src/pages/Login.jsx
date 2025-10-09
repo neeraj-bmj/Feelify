@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import "./Login.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import MoodContext from "../context/MoodContext";
 
 const Login = () => {
   const {
@@ -12,13 +13,17 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
+  const { loginUser } = useContext(MoodContext);
 
-  const submitHandler = (data) => {
+  // const navigate = useNavigate();
+
+  const submitHandler = async(data) => {
     console.log("Login data==================> ", data);
+
+    await loginUser(data);
+    
     reset();
-    toast.success("Logged in Successful.")
-    navigate("/");
+    // navigate("/");
   };
   return (
     <div className="formContainer">
@@ -56,7 +61,7 @@ const Login = () => {
             <div className="userPassword">
               <label className="label"> Password : </label>
               <input
-                {...register("passwrod", { required: " Password is required" })}
+                {...register("password", { required: " Password is required" })}
                 type="password"
                 placeholder="••••••••••••••••"
                 className="inputStyle"
