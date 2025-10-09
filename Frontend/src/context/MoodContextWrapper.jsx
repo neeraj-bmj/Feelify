@@ -53,6 +53,47 @@ const MoodContextWrapper = (props) => {
     FetchData(mood);
   }, [mood]);
 
+  // This is for register User for /api/user/auth/register route
+  const registerUser = async (data) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await axios.post(
+        "http://localhost:3000/api/user/auth/register",
+        {
+          fullName : {
+            firstName : data.firstName,
+            lastName : data.lastName
+          },
+          userName : data.userName,
+          email: data.email,
+          password: data.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            // "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("user registered  successfully:", response.data);
+      setUser(response.data.user); // update state
+      toast.success("User registered Successful.");
+      navigate("/");
+
+    } catch (err) {
+      setError(err);
+      setUser(null);
+      toast.error("Error in user registered.");
+      console.error("there was an error!", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   // This is for login User for /api/user/auth/login route
 
   const loginUser = async (data) => {
@@ -81,7 +122,7 @@ const MoodContextWrapper = (props) => {
     } catch (err) {
       setError(err);
       setUser(null);
-      toast.error("Invalid email or password.");
+      toast.error("Error in user Login.");
       console.error("there was an error!", err);
     } finally {
       setLoading(false);
@@ -96,6 +137,7 @@ const MoodContextWrapper = (props) => {
         loading,
         error,
         setLoading,
+        registerUser,
         loginUser,
         user,
         setUser,

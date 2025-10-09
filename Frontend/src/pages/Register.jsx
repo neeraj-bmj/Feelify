@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import "./Register.css";
 import { NavLink } from "react-router-dom";
+import MoodContext from "../context/MoodContext";
 
 const Register = () => {
   const {
@@ -11,9 +12,13 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  const {registerUser} = useContext(MoodContext);
 
-  const submitHandler = (data) => {
+  const submitHandler = async (data) => {
     console.log("Register data==================> ", data);
+
+    await registerUser(data);
+
     reset();
   };
   return (
