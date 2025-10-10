@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import "./User_Profile.css";
-import MoodContext from "../context/MoodContext";
+// import MoodContext from "../context/MoodContext";
 
-const User_Profile = () => {
+const User_Profile = ({userProfileData}) => {
   // Default / Dummy placeholder user when none provided
   const fallbackUser = {
     fullName : {
@@ -14,7 +14,7 @@ const User_Profile = () => {
     profilePhoto: "",
   };
 
-  const { userProfileData } = useContext(MoodContext);
+  // const { userProfileData } = useContext(MoodContext);
   console.log("userProfileData ============>",userProfileData);
 
   const u = { ...fallbackUser, ...(userProfileData || {}) };

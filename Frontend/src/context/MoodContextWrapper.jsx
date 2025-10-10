@@ -179,6 +179,9 @@ const MoodContextWrapper = (props) => {
     }
   }
 
+  useEffect(()=>{
+    fetchUserPofile()
+  }, [user]);
   
 
   return (
