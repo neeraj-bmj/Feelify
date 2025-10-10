@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import "./Login.css";
 import { NavLink } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import MoodContext from "../context/MoodContext";
 
 const Login = () => {
@@ -15,7 +14,6 @@ const Login = () => {
 
   const { loginUser } = useContext(MoodContext);
 
-  // const navigate = useNavigate();
 
   const submitHandler = async(data) => {
     console.log("Login data==================> ", data);
@@ -23,7 +21,6 @@ const Login = () => {
     await loginUser(data);
     
     reset();
-    // navigate("/");
   };
   return (
     <div className="formContainer">

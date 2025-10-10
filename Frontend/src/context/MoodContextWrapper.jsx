@@ -151,6 +151,9 @@ const MoodContextWrapper = (props) => {
   };
 
   // This is for show user_profile data for http://localhost:3000/api/user/auth/user_profile
+  // AND
+  // This is for auto login effect
+  // if user refresh page then automatic login if token available in localStorage
 
   async function fetchUserPofile() {
     try {
@@ -159,7 +162,7 @@ const MoodContextWrapper = (props) => {
       const token = localStorage.getItem("token");
       // OR
       // const token = cookieStore.getItem("token");
-      console.log("token==========>",token)
+      // console.log("token==========>", token);
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
       const res = await axios.get(
         "http://localhost:3000/api/user/auth/user_profile",
@@ -167,22 +170,25 @@ const MoodContextWrapper = (props) => {
           headers,
         }
       );
-      console.log("userProfileData ============>", res.data);
+      // console.log("userProfileData ============>", res.data);
       setUserProfileData(res.data.User || null);
+      setUser(res.data.User || null);
     } catch (err) {
       setError(err);
       setUserProfileData(null);
-      toast.error("Error in user see profile data.");
-      console.error("there was an error!", err);
+      setUser(null);
+      navigate("/api/user/auth/login")
+      // toast.error("Error in user see profile data.");
+      // console.error("there was an error!", err);
     } finally {
       setLoading(false);
     }
   }
 
-  useEffect(()=>{
-    fetchUserPofile()
-  }, [user]);
-  
+  useEffect(() => {
+    fetchUserPofile();
+  }, []);
+
 
   return (
     <MoodContext.Provider
