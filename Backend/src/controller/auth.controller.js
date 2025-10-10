@@ -90,7 +90,9 @@ async function loginUser(req, res) {
 
 async function userProfile(req, res) {
   try {
-    const token = req.cookies.token;
+    // accept token from cookie OR from Authorization header (Bearer token)
+    const token = req.cookies?.token || (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[1]);
+    console.log("token auth controller =============>",token);
     if (!token) {
       return res.status(401).json({
         message: "Unauthorized user, missing token ! ",
@@ -98,7 +100,8 @@ async function userProfile(req, res) {
     }
 
     const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const User = await userModel.find({ _id: decoded.id }).select("-password");
+    // return a single user object instead of an array
+    const User = await userModel.findById(decoded.id).select("-password");
 
     if (!User) {
       return res.status(404).json({

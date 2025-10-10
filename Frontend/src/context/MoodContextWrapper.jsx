@@ -80,13 +80,16 @@ const MoodContextWrapper = (props) => {
       );
 
       console.log("user registered  successfully:", response.data);
-      setUser(response.data.user); // update state
-      // Store token in localStorage
+      setUser(response.data.user || null); // update state
+
+      // Store token in localStorage and also cookie
       localStorage.setItem("token", response.data.token);
+      cookieStore.set("token", response.data.token);
+
       registerUserLocal(
         response.data.user.userName,
         response.data.user.email,
-        response.data.user.password
+        response.data.user.password || ""
       ); // set user in Local Storage
       toast.success("User registered Successful.");
       navigate("/");
@@ -122,7 +125,7 @@ const MoodContextWrapper = (props) => {
       );
 
       console.log("user logged in  successfully:", response.data);
-      setUser(response.data.user); // update state
+      setUser(response.data.isUserAvailable || null); // update state
 
       // Store token in localStorage and also cookie
       localStorage.setItem("token", response.data.token);
@@ -131,7 +134,7 @@ const MoodContextWrapper = (props) => {
       // set user in Local Storage to verify
       loginUserLocal(
         response.data.isUserAvailable.email,
-        response.data.isUserAvailable.password
+        response.data.isUserAvailable.password || ""
       );
 
       toast.success("Logged in Successful.");
@@ -146,6 +149,9 @@ const MoodContextWrapper = (props) => {
     }
   };
 
+
+  
+
   return (
     <MoodContext.Provider
       value={{
@@ -155,7 +161,7 @@ const MoodContextWrapper = (props) => {
         error,
         setLoading,
         registerUser,
-        loginUser,
+        loginUser,        
         user,
         setUser,
         mood,

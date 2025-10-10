@@ -1,16 +1,24 @@
 import React, { useContext, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import logoSvg from "../assets/react.svg";
 import MoodContext from "../context/MoodContext";
 
 const Navbar = () => {
-  const { user } = useContext(MoodContext);
+  const { user, fetchUserPofile } = useContext(MoodContext);
   const User = localStorage.getItem("user");
 
   useEffect(() => {
     const User = localStorage.getItem("user");
   }, [user]);
+
+  const navigate = useNavigate();
+  
+
+  const handleUserProfile = ()=>{
+      fetchUserPofile()
+      navigate("user_profile")
+  }
 
   return (
     <div className="navbar">
@@ -30,9 +38,9 @@ const Navbar = () => {
               {" "} Login {" "}
             </NavLink>
           ) : (
-            <NavLink to="user_profile" className="user_profile">
+            <button onClick={handleUserProfile} className="user_profile">
               <img src={logoSvg} alt="user_profile_logo" />
-            </NavLink>
+            </button>
           )
         }
       </div>
