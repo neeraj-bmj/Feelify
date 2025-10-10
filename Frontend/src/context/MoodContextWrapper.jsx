@@ -9,6 +9,7 @@ const MoodContextWrapper = (props) => {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const [userProfileData, setUserProfileData] = useState(null);
   const [error, setError] = useState(null);
   const [mood, setMood] = useState("default");
 
@@ -149,6 +150,34 @@ const MoodContextWrapper = (props) => {
     }
   };
 
+  // This is for show user_profile data for http://localhost:3000/api/user/auth/user_profile
+
+  async function fetchUserPofile() {
+    try {
+      setLoading(true);
+      setError(null);
+      const token = localStorage.getItem("token");
+      // OR
+      // const token = cookieStore.getItem("token");
+      console.log("token==========>",token)
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const res = await axios.get(
+        "http://localhost:3000/api/user/auth/user_profile",
+        {
+          headers,
+        }
+      );
+      console.log("userProfileData ============>", res.data);
+      setUserProfileData(res.data.User || null);
+    } catch (err) {
+      setError(err);
+      setUserProfileData(null);
+      toast.error("Error in user see profile data.");
+      console.error("there was an error!", err);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   
 
@@ -161,7 +190,9 @@ const MoodContextWrapper = (props) => {
         error,
         setLoading,
         registerUser,
-        loginUser,        
+        loginUser,
+        userProfileData,
+        fetchUserPofile,
         user,
         setUser,
         mood,
