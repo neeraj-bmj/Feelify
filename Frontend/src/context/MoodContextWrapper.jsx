@@ -16,11 +16,12 @@ const MoodContextWrapper = (props) => {
   const navigate = useNavigate();
 
   // This is for / router for all songs on home page.
-  useEffect(() => {
+
+  async function fetchSong() {
     try {
       setLoading(true);
       setError(null);
-      axios.get(`http://localhost:3000/`).then((response) => {
+      await axios.get(`http://localhost:3000/`).then((response) => {
         console.log("All Songs Fetched successfully", response.data);
         setSongs(response.data.songs || []);
       });
@@ -31,6 +32,10 @@ const MoodContextWrapper = (props) => {
     } finally {
       setLoading(false);
     }
+  }
+
+  useEffect(() => {
+    fetchSong();
   }, []);
 
   const FetchData = async (mood) => {
@@ -177,7 +182,7 @@ const MoodContextWrapper = (props) => {
       setError(err);
       setUserProfileData(null);
       setUser(null);
-      navigate("/api/user/auth/login")
+      navigate("/api/user/auth/login");
       // toast.error("Error in user see profile data.");
       // console.error("there was an error!", err);
     } finally {
@@ -189,6 +194,14 @@ const MoodContextWrapper = (props) => {
     fetchUserPofile();
   }, []);
 
+  // Logout handler
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    console.log("User Logout");
+    setUser(null);
+    navigate("/api/user/auth/login");
+  };
 
   return (
     <MoodContext.Provider
@@ -200,6 +213,7 @@ const MoodContextWrapper = (props) => {
         setLoading,
         registerUser,
         loginUser,
+        logoutUser,
         userProfileData,
         fetchUserPofile,
         user,

@@ -3,7 +3,7 @@ import User_Profile from "./User_Profile";
 import MoodContext from "../context/MoodContext";
 
 function UserProfilePage() {
-  const { user, loading, userProfileData } = useContext(MoodContext);
+  const { user, loading, logoutUser, userProfileData } = useContext(MoodContext);
 
   if (loading) {
     return <h3 style={{ textAlign: "center" }}>Loading user profile...</h3>;
@@ -15,7 +15,7 @@ function UserProfilePage() {
     return <h3 style={{ textAlign: "center" }}>No user data found</h3>;
   }
 
-  return <User_Profile userProfileData={userProfileData} />;
+  return <User_Profile userProfileData={userProfileData} logoutUser={logoutUser} />;
 }
 
 export default UserProfilePage;
