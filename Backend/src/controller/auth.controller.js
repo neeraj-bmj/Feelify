@@ -92,7 +92,7 @@ async function userProfile(req, res) {
   try {
     // accept token from cookie OR from Authorization header (Bearer token)
     const token = req.cookies?.token || (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[1]);
-    console.log("token auth controller =============>",token);
+    // console.log("token auth controller =============>",token);
     if (!token) {
       return res.status(401).json({
         message: "Unauthorized user, missing token ! ",

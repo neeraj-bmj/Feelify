@@ -12,6 +12,6 @@ router.post("/register", authController.registerUser);
 router.post("/login", authController.loginUser);
 
 // GET     /api/user/auth/user_profile
-router.get("/user_profile", authUserMiddleware ,authController.userProfile)
+router.get("/user_profile", authUserMiddleware , authController.userProfile)
 
 module.exports = router;

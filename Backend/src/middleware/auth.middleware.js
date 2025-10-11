@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 async function authUserMiddleware(req, res, next) {
   try {
     const token = req.cookies?.token || (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[1]);
-    console.log("token authMiddleware =============>",token);
+    // console.log("token authMiddleware =============>",token);
     if (!token) {
       return res.status(401).json({
         message: "Unauthorized user, missing token ! ",
