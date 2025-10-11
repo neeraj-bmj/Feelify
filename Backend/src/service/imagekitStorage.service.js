@@ -8,7 +8,7 @@ const client = new ImageKit({
 });
 
 async function uploadFile(file) {
-  console.log("this is file =========================>", file.buffer);
+  console.log("this is file imagekit storage service =============>", file.buffer);
   return(
     await client.files.upload(
       {

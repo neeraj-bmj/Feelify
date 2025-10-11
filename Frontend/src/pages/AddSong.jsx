@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import "./AddSong.css";
+import MoodContext from "../context/MoodContext";
+import { useContext } from "react";
 
 function AddSong() {
   const {
@@ -8,15 +10,17 @@ function AddSong() {
     reset,
     formState: { errors },
   } = useForm();
+  const { addSong } = useContext(MoodContext);
 
   // Submit handler
-  const onSubmit =  (data) => {
+  const onSubmit = async (data) => {
     console.log("song Data =========>", data);
     console.log("title==========", data.title);
     console.log("artist=========", data.artist);
     console.log("mood=========", data.mood);
     console.log("audio=========", data.audio[0]);
 
+    await addSong(data);
     reset(); // clear form
 
   };

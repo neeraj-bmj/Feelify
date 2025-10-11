@@ -203,9 +203,50 @@ const MoodContextWrapper = (props) => {
     navigate("/api/user/auth/login");
   };
 
+   // This is the function for add a song protected route
+  const addSong = async (data) => {
+    try {
+      setLoading(true);
+      setError(null);   
+      const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("artist", data.artist);
+      formData.append("mood", data.mood);
+      formData.append("audio", data.audio[0]); // file input gives array
+
+      // token from local Storage
+      const token = localStorage.getItem("token");
+      // OR
+      // const token = cookieStore.getItem("token");
+      // console.log("token moodcontext==========>", token);
+      const headers = token ? { "Content-Type": "multipart/form-data", Authorization: `Bearer ${token}` } : {};
+
+      const response = await axios.post(
+        "http://localhost:3000/add_songs",
+        formData,
+        {
+          headers,
+        }
+      );
+
+      console.log("Song uploaded successfully:", response.data);
+      toast.success("Song uploaded successfully!");
+      setSongs((prev) => [...prev, response.data.song]); // update state
+    } catch (err) {
+      setError(err);
+      setSongs([]);
+      toast.error("Something went wrong!");
+      // console.error("there was an error!", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <MoodContext.Provider
       value={{
+        addSong,
         songs,
         setSongs,
         loading,
