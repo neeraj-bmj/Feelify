@@ -13,6 +13,12 @@
     border-radius: 1rem;
     object-fit: cover;
 }
+.mood_expression{
+   color: #6B3F69;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   font-weight: 600;
+   font-size: 1.5rem;
+}
  .detect-Btn{
     cursor: pointer;
     padding: 0.6rem 1rem;

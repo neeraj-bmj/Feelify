@@ -6,7 +6,7 @@ import { MoodContext } from "../context/MoodContext.js";
 
 export default function FaceExpressionDetector() {
   const videoRef = useRef();
-  const { setMood }= useContext(MoodContext)
+  const { setMood, mood }= useContext(MoodContext)
 
   // here this is load models
   const loadModels = async () => {
@@ -59,13 +59,14 @@ export default function FaceExpressionDetector() {
 
   return (
     <div className="video-Container" style={{ position: "relative" }}>
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
+      <div className="video">
+          <video  ref={videoRef}  autoPlay  muted className="user-Video"
         // style={{ width: "720px", height: "560px" }}
-        className="user-Video"
-      />
+         />
+
+         <p className="mood_expression" >{`Your mood is ${mood}🤞`}</p>
+      </div>
+      
 
       <button onClick={detectMood} className="detect-Btn poppins-semibold">Detect Mood</button>
     </div>

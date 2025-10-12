@@ -41,7 +41,7 @@ const MoodContextWrapper = (props) => {
   const FetchData = async (mood) => {
     try {
       await axios
-        .get(`http://localhost:3000/songs?mood="${mood}"`)
+        .get(`http://localhost:3000/songs?mood=${mood}`)
         .then((response) => {
           console.log("Mood Songs Fetched successfully", response.data.songs);
           setSongs(response.data.songs);
@@ -200,6 +200,7 @@ const MoodContextWrapper = (props) => {
     localStorage.removeItem("user");
     console.log("User Logout");
     setUser(null);
+    toast.success("Logout successfully.🎉")
     navigate("/api/user/auth/login");
   };
 

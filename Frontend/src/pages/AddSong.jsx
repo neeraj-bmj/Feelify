@@ -84,7 +84,7 @@ function AddSong() {
               <option value="happy">Happy</option>
               <option value="sad">Sad</option>
               <option value="neutral">Neutral</option>
-              <option value="surprise">Surprise</option>
+              <option value="surprised">Surprise</option>
               <option value="angry">Angry</option>
               <option value="fearful">Fearful</option>
               <option value="disgusted">Disgusted</option>

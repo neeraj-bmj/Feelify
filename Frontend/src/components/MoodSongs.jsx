@@ -28,7 +28,7 @@ const MoodSongs = () => {
         {songs.map((song, index) => (
           <div className="group" key={index}>
             <div className="titleArtist">
-              <div className="title">{song.title}</div>
+              <div className="title">{song.title.slice(0,20)}</div>
               <div className="artist">{song.artist}</div>
             </div>
             <div className="play-pause-icon">
