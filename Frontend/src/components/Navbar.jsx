@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import logoSvg from "../assets/react.svg";
@@ -14,6 +14,10 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
+  const [open, setOpen] = useState(false);
+
+  const toggleMenu = () => setOpen((v) => !v);
+
   const handleUserProfile = () => {
     fetchUserPofile();
     navigate("user_profile");
@@ -22,7 +26,18 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="logo-first-heading poppins-semibold">FeeliFy</div>
-      <div className="part-second">
+
+      {/* Menu button for small screens - uses remix icons via CDN already included in project */}
+      <button
+        className={`menu-button poppins-semibold ${open ? "open" : ""}`}
+        onClick={toggleMenu}
+        aria-expanded={open}
+        aria-controls="main-navigation" >
+              <i className="ri-menu-line" aria-hidden="true"></i>
+              <span className="visually-hidden">Toggle menu</span>
+      </button>
+
+      <div className={`part-second ${open ? "open" : ""}`} id="main-navigation">
         <NavLink to="/" className={(e) => e.isActive ? "active_link poppins-semibold" : "poppins-semibold" }>
           Home
         </NavLink>

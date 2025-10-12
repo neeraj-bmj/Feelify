@@ -24,6 +24,20 @@
   color: white;
   align-items: center;
 }
+
+/* Menu button for small screens */
+.menu-button {
+  display: none; /* hidden on desktop */
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.menu-button:focus {
+  outline: 2px solid rgba(255,255,255,0.6);
+  outline-offset: 2px;
+}
 .part-second a{
     color: white;
     text-decoration: none;
@@ -71,6 +85,31 @@
     height: 2.5rem;
     border-width: 0.2rem;
   }
+
+  /* show menu button on medium screens */
+  .menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* When menu is closed on smaller screens, hide nav links (they'll be toggled) */
+  .part-second {
+    position: absolute;
+    top: 4.5rem;
+    right: 0.75rem;
+    background: #6B3F69;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    display: none;
+    z-index: 200;
+  }
+
+  .part-second.open {
+    display: flex;
+  }
 }
 
 @media (max-width: 520px) {
@@ -109,6 +148,11 @@
     width: 2.2rem;
     height: 2.2rem;
     border-width: 0.18rem;
+  }
+
+  /* ensure menu button still visible on very small screens */
+  .menu-button {
+    display: inline-flex;
   }
 }
 
