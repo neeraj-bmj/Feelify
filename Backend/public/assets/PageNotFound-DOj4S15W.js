@@ -1,0 +1,1 @@
+import{j as e}from"./index-DOz5Yj_0.js";const n=()=>e.jsx("div",{style:{height:"87vh",display:"flex",justifyContent:"center",alignItems:"center"},children:e.jsx("div",{className:"heading",style:{color:"#b30ab0",fontSize:"4rem"},children:" 404 || Page Not Found "})});export{n as default};

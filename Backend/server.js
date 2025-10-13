@@ -11,5 +11,5 @@ connectToDB()
 
 
 app.listen(3000, (req, res) => {
-  console.log("server is running on port http://localhost:3000");
+  console.log("server is running on port https://feelify-9vpg.onrender.com");
 });

@@ -21,7 +21,7 @@ const MoodContextWrapper = (props) => {
     try {
       setLoading(true);
       setError(null);
-      await axios.get(`http://localhost:3000/`).then((response) => {
+      await axios.get(`https://feelify-9vpg.onrender.com/`).then((response) => {
         // console.log("All Songs Fetched successfully", response.data);
         setSongs(response.data.songs || []);
       });
@@ -41,7 +41,7 @@ const MoodContextWrapper = (props) => {
   const FetchData = async (mood) => {
     try {
       await axios
-        .get(`http://localhost:3000/songs?mood=${mood}`)
+        .get(`https://feelify-9vpg.onrender.com/songs?mood=${mood}`)
         .then((response) => {
           // console.log("Mood Songs Fetched successfully", response.data.songs);
           setSongs(response.data.songs);
@@ -67,7 +67,7 @@ const MoodContextWrapper = (props) => {
       setError(null);
 
       const response = await axios.post(
-        "http://localhost:3000/api/user/auth/register",
+        "https://feelify-9vpg.onrender.com/api/user/auth/register",
         {
           fullName: {
             firstName: data.firstName,
@@ -117,7 +117,7 @@ const MoodContextWrapper = (props) => {
       setError(null);
 
       const response = await axios.post(
-        "http://localhost:3000/api/user/auth/login",
+        "https://feelify-9vpg.onrender.com/api/user/auth/login",
         {
           email: data.email,
           password: data.password,
@@ -155,7 +155,7 @@ const MoodContextWrapper = (props) => {
     }
   };
 
-  // This is for show user_profile data for http://localhost:3000/api/user/auth/user_profile
+  // This is for show user_profile data for https://feelify-9vpg.onrender.com/api/user/auth/user_profile
   // AND
   // This is for auto login effect
   // if user refresh page then automatic login if token available in localStorage
@@ -176,7 +176,7 @@ const MoodContextWrapper = (props) => {
       
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
       const res = await axios.get(
-        "http://localhost:3000/api/user/auth/user_profile",
+        "https://feelify-9vpg.onrender.com/api/user/auth/user_profile",
         {
           headers,
         }
@@ -229,7 +229,7 @@ const MoodContextWrapper = (props) => {
       const headers = token ? { "Content-Type": "multipart/form-data", Authorization: `Bearer ${token}` } : {};
 
       const response = await axios.post(
-        "http://localhost:3000/add_songs",
+        "https://feelify-9vpg.onrender.com/add_songs",
         formData,
         {
           headers,
