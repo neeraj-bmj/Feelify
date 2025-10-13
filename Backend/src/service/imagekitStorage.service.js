@@ -2,9 +2,9 @@ const { v4: uuid } = require("uuid");
 const { toFile, ImageKit } = require("@imagekit/nodejs");
 
 const client = new ImageKit({
-  publicKey: process.env.ImageKit_publicKey,
-  privateKey: process.env.ImageKit_privateKey,
-  urlEndpoint: process.env.ImageKit_urlEndpoint,
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+  privateKey: process.env['IMAGEKIT_PRIVATE_KEY'],
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
 });
 
 async function uploadFile(file) {
