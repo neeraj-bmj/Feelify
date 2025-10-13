@@ -62,7 +62,7 @@ const Navbar = () => {
             </NavLink>
           ) : (
             <button onClick={handleUserProfile} className="user_profile">
-              <i class="iconUser ri-account-circle-fill"></i>
+              <i className="iconUser ri-account-circle-fill"></i>
             </button>
           )
         }
