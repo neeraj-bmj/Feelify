@@ -54,14 +54,17 @@
   background-color: white;
   overflow: hidden;
   border-radius: 100%;
-  border: 0.3rem solid rgb(48, 48, 228);
+  border: 0.3rem solid #adadfb;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.user_profile img {
+.user_profile .iconUser {
   object-fit: cover;
+  font-size: 3.2rem;
+  color: #a37aa3;
+  border: none;
 }
 
 /* Responsive adjustments */
@@ -84,6 +87,10 @@
     width: 2.5rem;
     height: 2.5rem;
     border-width: 0.2rem;
+  }
+
+  .user_profile .iconUser{
+    font-size: 1.9rem;
   }
 
   /* show menu button on medium screens */
