@@ -22,7 +22,7 @@ const MoodContextWrapper = (props) => {
       setLoading(true);
       setError(null);
       await axios.get(`http://localhost:3000/`).then((response) => {
-        console.log("All Songs Fetched successfully", response.data);
+        // console.log("All Songs Fetched successfully", response.data);
         setSongs(response.data.songs || []);
       });
     } catch (err) {
@@ -43,7 +43,7 @@ const MoodContextWrapper = (props) => {
       await axios
         .get(`http://localhost:3000/songs?mood=${mood}`)
         .then((response) => {
-          console.log("Mood Songs Fetched successfully", response.data.songs);
+          // console.log("Mood Songs Fetched successfully", response.data.songs);
           setSongs(response.data.songs);
         });
     } catch (err) {
@@ -168,6 +168,12 @@ const MoodContextWrapper = (props) => {
       // OR
       // const token = cookieStore.getItem("token");
       // console.log("token==========>", token);
+      if(!token){
+      //  console.log("No token found — skipping auto-login");
+       setLoading(false);
+        return; 
+      }
+      
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
       const res = await axios.get(
         "http://localhost:3000/api/user/auth/user_profile",
