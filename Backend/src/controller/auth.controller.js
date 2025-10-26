@@ -12,7 +12,7 @@ async function registerUser(req, res) {
     password,
     fullName: { firstName, lastName },
   } = req.body;
-  console.log("🤷‍♀️register data in req.body==========",req.body);
+  console.log("🤷‍♀️register data in req.body==========", req.body);
   const isUserAvailable = await userModel.findOne({ email });
   if (isUserAvailable) {
     return res.status(401).JSON({
@@ -31,7 +31,11 @@ async function registerUser(req, res) {
     password: hashPassword,
   });
 
-  const token = await jwt.sign({ id: user._id, email : user.email }, process.env.JWT_SECRET_KEY,{ expiresIn : "7d"});
+  const token = await jwt.sign(
+    { id: user._id, email: user.email },
+    process.env.JWT_SECRET_KEY,
+    { expiresIn: "7d" }
+  );
   res.cookie("token", token);
 
   console.log("✅user Registered successful ✅", user);
@@ -46,7 +50,7 @@ async function registerUser(req, res) {
 
 async function loginUser(req, res) {
   const { email, password } = req.body;
-  console.log("🤷‍♀️login data in req.body=========>",req.body);
+  console.log("🤷‍♀️login data in req.body=========>", req.body);
   const isUserAvailable = await userModel.findOne({ email });
   if (!isUserAvailable) {
     return res.status(401).json({
@@ -61,20 +65,20 @@ async function loginUser(req, res) {
   if (!isValidPassword) {
     return res.status(400).json({
       message: "Invalid email or password",
-    }); 
+    });
   }
 
   try {
-    const token = await jwt.sign( 
-      { id: isUserAvailable._id, email : isUserAvailable.email },
+    const token = await jwt.sign(
+      { id: isUserAvailable._id, email: isUserAvailable.email },
       process.env.JWT_SECRET_KEY,
-      {expiresIn : "7d"} 
+      { expiresIn: "7d" }
     );
     res.cookie("token", token);
-    
+
     console.log("Token=======>", token);
     console.log("✅user Logged in successful ===> ✅", isUserAvailable);
-    res.status(200).json( {
+    res.status(200).json({
       message: "user logged in successfully",
       isUserAvailable,
       token, // include token here
@@ -82,7 +86,7 @@ async function loginUser(req, res) {
   } catch (error) {
     return res.status(409).json({
       message: "Unauthorized user",
-    }); 
+    });
   }
 }
 
@@ -91,7 +95,11 @@ async function loginUser(req, res) {
 async function userProfile(req, res) {
   try {
     // accept token from cookie OR from Authorization header (Bearer token)
-    const token = req.cookies?.token || (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[1]);
+    const token =
+      req.cookies?.token ||
+      (req.headers &&
+        req.headers.authorization &&
+        req.headers.authorization.split(" ")[1]);
     // console.log("token auth controller =============>",token);
     if (!token) {
       return res.status(401).json({
@@ -122,8 +130,30 @@ async function userProfile(req, res) {
   }
 }
 
+// logout api
+async function logoutUser(req, res) {
+  // logic
+  try {
+    const { token } = req.cookies;
+    console.log("token ==========>", token);
+
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
+    
+    res.status(200).json({
+      message: "user logout successfully.",
+    });
+  } catch (err) {
+    console.log("Error==============>", err);
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
   userProfile,
+  logoutUser,
 };
