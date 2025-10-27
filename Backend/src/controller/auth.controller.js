@@ -2,6 +2,7 @@ const { JsonWebTokenError } = require("jsonwebtoken");
 const userModel = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { redisClient } = require("../db/redis");
 
 // register User api
 
@@ -34,7 +35,7 @@ async function registerUser(req, res) {
   const token = await jwt.sign(
     { id: user._id, email: user.email },
     process.env.JWT_SECRET_KEY,
-    { expiresIn: "7d" }
+    { expiresIn: "7d" } // token expired in 7 days
   );
   res.cookie("token", token);
 
@@ -72,7 +73,7 @@ async function loginUser(req, res) {
     const token = await jwt.sign(
       { id: isUserAvailable._id, email: isUserAvailable.email },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" } // token expired in 7 days
     );
     res.cookie("token", token);
 
@@ -132,17 +133,11 @@ async function userProfile(req, res) {
 
 // logout api
 async function logoutUser(req, res) {
-  // logic
   try {
     const { token } = req.cookies;
     console.log("token ==========>", token);
 
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-    });
-    
+
     res.status(200).json({
       message: "user logout successfully.",
     });

@@ -1,3 +1,4 @@
+const { redisClient } = require("../db/redis");
 const userModel = require("../models/user.model");
 const jwt = require('jsonwebtoken');
 
@@ -5,13 +6,16 @@ const jwt = require('jsonwebtoken');
 async function authUserMiddleware(req, res, next) {
   try {
     const token = req.cookies?.token || (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[1]);
-    // console.log("token authMiddleware =============>",token);
+    // console.log("token authMiddleware =============>",token); 
     if (!token) {
       return res.status(401).json({
         message: "Unauthorized user, missing token ! ",
       });
     }
 
+    
+
+    // verify user with token
     const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
     const User = await userModel.findById({ _id: decoded.id }).select("-password");
 
