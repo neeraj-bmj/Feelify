@@ -137,6 +137,30 @@ async function logoutUser(req, res) {
     const { token } = req.cookies;
     console.log("token ==========>", token);
 
+    // token = header.payload.DigitalSignature
+    // header = version  ,  iterationCount Round
+    // payload = email, userID
+    // DigitalSignature = hash code of data from SHA256
+
+    // sepret payload form token
+    const payload = await jwt.decode(token);
+    console.log("Payload ====>", payload);
+
+    // stored token in Redis to add blocklist
+    await redisClient.set(`token:${token}`, "Blocked");
+
+    // token expired
+    // await redisClient.expire(`token:${token}`, "7d");    // for static time hardcoded time value
+    await redisClient.expireAt(`token:${token}`, payload.exp);
+
+    // clear token from cookie
+    // res.clearCookie("token", {
+    //   httpOnly: true,
+    //   secure: true,
+    //   sameSite: "None",
+    // });
+    //  OR
+    res.cookie("token", null,{expires : new Date(Date.now())});
 
     res.status(200).json({
       message: "user logout successfully.",

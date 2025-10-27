@@ -13,7 +13,11 @@ async function authUserMiddleware(req, res, next) {
       });
     }
 
-    
+    // check token blocked or not he give ans 0 false 1 true
+    const IsBlocked = await redisClient.exists(`token:${token}`);
+    console.log("IsBlocked========>",IsBlocked);
+    if (IsBlocked)
+      throw new Error("Invalid token, Please login again.")
 
     // verify user with token
     const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
