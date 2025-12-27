@@ -31,8 +31,8 @@ const Navbar = () => {
         className={`menu-button poppins-semibold ${open ? "open" : ""}`}
         onClick={toggleMenu}
         aria-expanded={open}
-        aria-controls="main-navigation" >
-              <i className="ri-menu-line" aria-hidden="true"></i>
+        aria-controls="main-navigation" >{}
+              <i className={ open ? "ri-close-large-fill" : "ri-menu-line"} aria-hidden="true"></i>
               <span className="visually-hidden">Toggle menu</span>
       </button>
 

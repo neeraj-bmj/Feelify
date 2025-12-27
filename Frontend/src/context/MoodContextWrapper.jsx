@@ -4,6 +4,8 @@ import MoodContext from "./MoodContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { loginUserLocal, registerUserLocal } from "../utils/Auth";
+import { fetchUserPofile } from "../utils/fetchUserPofile";
+import { fetchSong } from "../utils/fetchSong";
 
 const MoodContextWrapper = (props) => {
   const [songs, setSongs] = useState([]);
@@ -15,27 +17,11 @@ const MoodContextWrapper = (props) => {
 
   const navigate = useNavigate();
 
-  // This is for / router for all songs on home page.
 
-  async function fetchSong() {
-    try {
-      setLoading(true);
-      setError(null);
-      await axios.get(`https://feelify-9vpg.onrender.com/`).then((response) => {
-        // console.log("All Songs Fetched successfully", response.data);
-        setSongs(response.data.songs || []);
-      });
-    } catch (err) {
-      setError(err);
-      setSongs([]);
-      console.error("there was an error!", err);
-    } finally {
-      setLoading(false);
-    }
-  }
-
+// here fetch song and fetchUserProfile
   useEffect(() => {
-    fetchSong();
+    fetchSong({setLoading, setError, setSongs});
+    fetchUserPofile({setLoading, setError,setUserProfileData, setUser});
   }, []);
 
   const FetchData = async (mood) => {
@@ -160,45 +146,6 @@ const MoodContextWrapper = (props) => {
   // This is for auto login effect
   // if user refresh page then automatic login if token available in localStorage
 
-  async function fetchUserPofile() {
-    try {
-      setLoading(true);
-      setError(null);
-      const token = localStorage.getItem("token");
-      // OR
-      // const token = cookieStore.getItem("token");
-      // console.log("token==========>", token);
-      if(!token){
-      //  console.log("No token found — skipping auto-login");
-       setLoading(false);
-        return; 
-      }
-      
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      const res = await axios.get(
-        "https://feelify-9vpg.onrender.com/api/user/auth/user_profile",
-        {
-          headers,
-        }
-      );
-      // console.log("userProfileData ============>", res.data);
-      setUserProfileData(res.data.User || null);
-      setUser(res.data.User || null);
-    } catch (err) {
-      setError(err);
-      setUserProfileData(null);
-      setUser(null);
-      navigate("/api/user/auth/login");
-      // toast.error("Error in user see profile data.");
-      // console.error("there was an error!", err);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchUserPofile();
-  }, []);
 
   // Logout handler
   const logoutUser = () => {
